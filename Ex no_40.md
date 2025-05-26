@@ -51,3 +51,93 @@ bc
 a bc bc
 bc a bc
 bc bc a
+
+AIM:
+
+To write a program to print permutation for the given string.
+
+ALGORITHM:
+1. Start.
+2. Define a variables.
+3. Write a program to print permutation for the given string.
+4. Read the value using scanf.
+5. Ask the user to make an input.
+6. Print out the answer.
+7. End.
+
+PROGRAM:
+
+```
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+void swap (char **a, char **b)
+{
+    char *temp = *a;
+    *a = *b;
+    *b = temp;
+}
+int next_permutation (char *arr[],int n)
+{
+    int i = n -2;
+    while (i>=0 && strcmp(arr[i],arr[i+1]) >=0)
+    {
+        i--;
+    }
+    if(i<0)
+    {
+        return 0;
+    }
+    int j = n-1;
+    while (strcmp(arr[j],arr[i])<=0)
+    {
+        j--;
+    }
+    swap(&arr[i],&arr[j]);
+    int left =i+1,right=n-1;
+    while(left<right)
+    {
+        swap(&arr[left],&arr[right]);
+        left++;
+        right--;
+    }
+    
+    return 1;
+}
+int main()
+{
+    int n,i;
+    char *arr[100];
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+    {
+        arr[i] = (char *)malloc(101*sizeof(char));
+        scanf("%s",arr[i]);
+    }
+    
+    do
+    {
+        for(i=0;i<n;i++)
+        {
+            printf("%s ",arr[i]);
+        }
+        printf("\n");
+    }
+    while (next_permutation(arr,n));
+    for(i=0;i<n;i++)
+    {
+        free(arr[i]);
+    }
+    
+    return 0;
+}
+
+```
+
+OUTPUT:
+
+![image](https://github.com/user-attachments/assets/994d292a-d52d-4cf2-a762-e6d2d3ce9351)
+
+RESULT:
+
+Thus, the program is executed and verified successfully.
